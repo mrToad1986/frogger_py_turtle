@@ -1,16 +1,38 @@
-# This is a sample Python script.
+import turtle
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
+# Screen setup
+wn = turtle.Screen()
+wn.title('Frogger game')
+wn.setup(600, 800)
+wn.bgcolor('black')
+wn.register_shape('media/frog.gif')
+
+pen = turtle.Turtle()
+pen.speed(0)
+pen.hideturtle()
+
+# Create classes
+class Sprite():
+    def __init__(self, x, y, width, height, image):
+        self.x = x
+        self.y = y
+        self.width = width
+        self.height = height
+        self.image = image
+
+    def render(self, pen):
+        pen.goto(self.x, self.y)
+        pen.shape(self.image)
+        pen.stamp()
+
+class Player(Sprite):
+    def __init__(self, x, y, width, height, image):
+        Sprite.__init__(self, x, y, width, height, image)
+
+# Create objects
+player = Player(0, -300, 40, 40, 'media/frog.gif')
+player.render(pen)
 
 
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
 
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+wn.mainloop()
