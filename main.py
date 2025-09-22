@@ -1,7 +1,9 @@
 import turtle
+import math
 
 # Screen setup
 wn = turtle.Screen()
+wn.cv._rootwindow.resizable(False, False)
 wn.title('Frogger game')
 wn.setup(600, 800)
 wn.bgcolor('black')
@@ -31,6 +33,13 @@ class Sprite():
         pen.goto(self.x, self.y)
         pen.shape(self.image)
         pen.stamp()
+
+    # AABB check (Axis-Aligned Bounding Box)
+    def is_collision(self, other):
+        x_collision = (math.fabs(self.x - other.x) * 2) < (self.width + other.width)
+        y_collision = (math.fabs(self.y - other.y) * 2) < (self.height + other.height)
+        return (x_collision and y_collision)
+
 
 class Player(Sprite):
     def __init__(self, x, y, width, height, image):
@@ -64,8 +73,8 @@ class Car(Sprite):
 player = Player(0, -300, 40, 40, 'media/frog.gif')
 player.render(pen)
 
-car_left = Car(0, -250, 40, 121, 'media/car_left.gif', -0.08)
-car_right = Car(0, -200, 40, 121, 'media/car_right.gif', 0.08)
+car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.08)
+car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.08)
 
 # Keyboard binding
 wn.listen()
@@ -80,9 +89,14 @@ while True:
     car_left.render(pen)
     car_right.render(pen)
 
-    #update objects
+    # update objects
     car_left.update()
     car_right.update()
+
+    # check for collisions
+    if player.is_collision(car_left) or player.is_collision(car_right):
+        player.x = 0
+        player.y = -300
 
     # update screen
     wn.update()
