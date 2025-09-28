@@ -15,6 +15,7 @@ wn.tracer(0)
 wn.register_shape('media/frog.gif')
 wn.register_shape('media/car_left.gif')
 wn.register_shape('media/car_right.gif')
+wn.register_shape('media/log_full.gif')
 
 pen = turtle.Turtle()
 pen.speed(0)
@@ -69,12 +70,26 @@ class Car(Sprite):
         if self.x > 400:
             self.x = -400
 
+class Log(Sprite):
+    def __init__(self, x, y, width, height, image, dx):
+        Sprite.__init__(self, x, y, width, height, image)
+        self.dx = dx
+    def update(self):
+        self.x += self.dx
+
+        # Border cheking
+        if self.x < - 400:
+            self.x = 400
+        if self.x > 400:
+            self.x = -400
+
 # Create objects
 player = Player(0, -300, 40, 40, 'media/frog.gif')
-player.render(pen)
 
-car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.08)
-car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.08)
+car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
+car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
+log_left = Log(0, -100, 121, 40, 'media/log_full.gif', -0.08)
+log_right = Log(0, -150, 121, 40, 'media/log_full.gif', 0.08)
 
 # Keyboard binding
 wn.listen()
@@ -85,13 +100,17 @@ wn.onkeypress(player.left, 'a')
 
 while True:
     # render
-    player.render(pen)
     car_left.render(pen)
     car_right.render(pen)
+    log_left.render(pen)
+    log_right.render(pen)
+    player.render(pen)
 
     # update objects
     car_left.update()
     car_right.update()
+    log_left.update()
+    log_right.update()
 
     # check for collisions
     if player.is_collision(car_left) or player.is_collision(car_right):
