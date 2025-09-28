@@ -45,6 +45,7 @@ class Sprite():
 class Player(Sprite):
     def __init__(self, x, y, width, height, image):
         Sprite.__init__(self, x, y, width, height, image)
+        self.dx = 0
 
     def up(self):
         self.y += 50
@@ -57,6 +58,10 @@ class Player(Sprite):
 
     def left(self):
         self.x -= 50
+
+    def update(self):
+        self.x += self.dx
+
 class Car(Sprite):
     def __init__(self, x, y, width, height, image, dx):
         Sprite.__init__(self, x, y, width, height, image)
@@ -85,11 +90,13 @@ class Log(Sprite):
 
 # Create objects
 player = Player(0, -300, 40, 40, 'media/frog.gif')
-
 car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
 car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
 log_left = Log(0, -100, 121, 40, 'media/log_full.gif', -0.08)
 log_right = Log(0, -150, 121, 40, 'media/log_full.gif', 0.08)
+
+# Create list of sprites
+sprites = [player, car_left, car_right, log_left, log_right]
 
 # Keyboard binding
 wn.listen()
@@ -99,23 +106,25 @@ wn.onkeypress(player.right, 'd')
 wn.onkeypress(player.left, 'a')
 
 while True:
-    # render
-    car_left.render(pen)
-    car_right.render(pen)
-    log_left.render(pen)
-    log_right.render(pen)
-    player.render(pen)
-
-    # update objects
-    car_left.update()
-    car_right.update()
-    log_left.update()
-    log_right.update()
+    # render and update
+    for sprite in sprites:
+        sprite.render(pen)
+        sprite.update()
 
     # check for collisions
     if player.is_collision(car_left) or player.is_collision(car_right):
         player.x = 0
         player.y = -300
+
+    if player.is_collision(log_left):
+        player.dx = log_left.dx
+    else:
+        player.dx = 0
+
+    if player.is_collision(log_right):
+        player.dx = log_right.dx
+    else:
+        player.dx = 0
 
     # update screen
     wn.update()
