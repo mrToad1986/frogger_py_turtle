@@ -70,10 +70,9 @@ class Car(Sprite):
         self.x += self.dx
 
         # Border cheking
-        if self.x < - 400:
-            self.x = 400
-        if self.x > 400:
-            self.x = -400
+        if self.x < - 300 or self.x > 300:
+            self.x = 0
+            self.y = -300
 
 class Log(Sprite):
     def __init__(self, x, y, width, height, image, dx):
@@ -96,7 +95,8 @@ log_left = Log(0, -100, 121, 40, 'media/log_full.gif', -0.08)
 log_right = Log(0, -150, 121, 40, 'media/log_full.gif', 0.08)
 
 # Create list of sprites
-sprites = [player, car_left, car_right, log_left, log_right]
+sprites = [car_left, car_right, log_left, log_right]
+sprites.append(player)
 
 # Keyboard binding
 wn.listen()
@@ -112,19 +112,30 @@ while True:
         sprite.update()
 
     # check for collisions
-    if player.is_collision(car_left) or player.is_collision(car_right):
-        player.x = 0
-        player.y = -300
+    player.dx = 0
+    for sprite in sprites:
+        if player.is_collision(sprite):
+            if isinstance(sprite, Car):
+                player.x = 0
+                player.y = -300
+                break
+            elif isinstance(sprite, Log):
+                player.dx = sprite.dx
+                break
 
-    if player.is_collision(log_left):
-        player.dx = log_left.dx
-    else:
-        player.dx = 0
+    #if player.is_collision(car_left) or player.is_collision(car_right):
+    #    player.x = 0
+    #    player.y = -300
 
-    if player.is_collision(log_right):
-        player.dx = log_right.dx
-    else:
-        player.dx = 0
+    #if player.is_collision(log_left):
+    #    player.dx = log_left.dx
+    #else:
+    #    player.dx = 0
+
+    #if player.is_collision(log_right):
+    #    player.dx = log_right.dx
+    #else:
+    #    player.dx = 0
 
     # update screen
     wn.update()
