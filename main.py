@@ -61,6 +61,9 @@ class Player(Sprite):
 
     def update(self):
         self.x += self.dx
+        if self.x < -300 or self.x > 300:
+            self.x = 0
+            self.y = -300
 
 class Car(Sprite):
     def __init__(self, x, y, width, height, image, dx):
@@ -70,9 +73,10 @@ class Car(Sprite):
         self.x += self.dx
 
         # Border cheking
-        if self.x < - 300 or self.x > 300:
-            self.x = 0
-            self.y = -300
+        if self.x < - 400:
+            self.x = 400
+        if self.x > 400:
+            self.x = -400
 
 class Log(Sprite):
     def __init__(self, x, y, width, height, image, dx):
