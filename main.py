@@ -12,10 +12,16 @@ wn.bgcolor('black')
 wn.tracer(0)
 
 # Register shapes
-wn.register_shape('media/frog.gif')
-wn.register_shape('media/car_left.gif')
-wn.register_shape('media/car_right.gif')
-wn.register_shape('media/log_full.gif')
+shapes = [
+    'media/frog.gif',
+    'media/car_left.gif',
+    'media/car_right.gif',
+    'media/log_full.gif',
+    'media/turtle_left.gif',
+    'media/turtle_right.gif',
+]
+for shape in shapes:
+    wn.register_shape(shape)
 
 pen = turtle.Turtle()
 pen.speed(0)
