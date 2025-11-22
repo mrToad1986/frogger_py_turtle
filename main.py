@@ -97,15 +97,31 @@ class Log(Sprite):
         if self.x > 400:
             self.x = -400
 
+class Turtle(Sprite):
+    def __init__(self, x, y, width, height, image, dx):
+        Sprite.__init__(self, x, y, width, height, image)
+        self.dx = dx
+
+    def update(self):
+        self.x += self.dx
+
+        # Border cheking
+        if self.x < - 400:
+            self.x = 400
+        if self.x > 400:
+            self.x = -400
+
 # Create objects
 player = Player(0, -300, 40, 40, 'media/frog.gif')
 car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
 car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
 log_left = Log(0, -100, 121, 40, 'media/log_full.gif', -0.08)
 log_right = Log(0, -150, 121, 40, 'media/log_full.gif', 0.08)
+turtle_left = Turtle(0, -50, 121, 40, 'media/turtle_left.gif', -0.09)
+turtle_right = Turtle(0, 0, 121, 40, 'media/turtle_right.gif', 0.09)
 
 # Create list of sprites
-sprites = [car_left, car_right, log_left, log_right]
+sprites = [car_left, car_right, log_left, log_right, turtle_left, turtle_right]
 sprites.append(player)
 
 # Keyboard binding
@@ -132,6 +148,10 @@ while True:
             elif isinstance(sprite, Log):
                 player.dx = sprite.dx
                 break
+            elif isinstance(sprite, Turtle):
+                player.dx = sprite.dx
+                break
+
 
     #if player.is_collision(car_left) or player.is_collision(car_right):
     #    player.x = 0
