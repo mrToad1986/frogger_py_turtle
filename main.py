@@ -1,6 +1,7 @@
 import turtle
 import math
 import time
+import random
 
 # Screen setup
 wn = turtle.Screen()
@@ -106,10 +107,9 @@ class Turtle(Sprite):
         Sprite.__init__(self, x, y, width, height, image)
         self.dx = dx
         self.state = 'full' # half, submerged
-        self.full_time = 10
-        self.half_time = 5
-        self.submerged_time = 5
-        self.start_time = 0
+        self.full_time = random.randint(8, 12)
+        self.half_time = random.randint(4,6)
+        self.submerged_time = random.randint(4,6)
         self.start_time = time.time()
 
     def update(self):
