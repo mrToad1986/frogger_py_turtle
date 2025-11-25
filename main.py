@@ -127,7 +127,7 @@ class Turtle(Sprite):
                 self.image = 'media/turtle_right.gif'
             else:
                 self.image = 'media/turtle_left.gif'
-        elif self.state == 'half':
+        elif self.state == 'half_up' or self.state == 'half_down':
             if self.dx > 0:
                 self.image = 'media/turtle_right_half.gif'
             else:
@@ -137,13 +137,13 @@ class Turtle(Sprite):
 
         # State timer
         if self.state == 'full' and time.time() - self.start_time > self.full_time:
-            self.state = 'half'
+            self.state = 'half_down'
             self.start_time = time.time()
-        elif self.state == 'half' and time.time() - self.start_time > self.half_time:
+        elif self.state == 'half_down' and time.time() - self.start_time > self.half_time:
             self.state = 'submerged'
             self.start_time = time.time()
         elif self.state == 'submerged' and time.time() - self.start_time > self.submerged_time:
-            self.state = 'half'
+            self.state = 'half_up'
             self.start_time = time.time()
 
 # Create objects
@@ -183,7 +183,8 @@ while True:
             elif isinstance(sprite, Log):
                 player.dx = sprite.dx
                 break
-            elif isinstance(sprite, Turtle):
+            # no collision for submerged turtle
+            elif isinstance(sprite, Turtle) and sprite.state != 'submerged':
                 player.dx = sprite.dx
                 break
 
