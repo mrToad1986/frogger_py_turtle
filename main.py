@@ -8,7 +8,7 @@ wn = turtle.Screen()
 wn.cv._rootwindow.resizable(False, False)
 wn.title('Frogger game')
 wn.setup(600, 800)
-wn.bgcolor('black')
+wn.bgcolor('green')
 
 # Tracer turn off screen update
 wn.tracer(0)
@@ -23,7 +23,9 @@ shapes = [
     'media/turtle_right.gif',
     'media/turtle_left_half.gif',
     'media/turtle_right_half.gif',
-    'media/turtle_submerged.gif'
+    'media/turtle_submerged.gif',
+    'media/home.gif',
+    'media/frog_home.gif',
 ]
 for shape in shapes:
     wn.register_shape(shape)
@@ -31,6 +33,7 @@ for shape in shapes:
 pen = turtle.Turtle()
 pen.speed(0)
 pen.hideturtle()
+pen.penup()
 
 # Create classes
 class Sprite():
@@ -45,6 +48,9 @@ class Sprite():
         pen.goto(self.x, self.y)
         pen.shape(self.image)
         pen.stamp()
+
+    def update(self):
+        pass
 
     # AABB check (Axis-Aligned Bounding Box)
     def is_collision(self, other):
@@ -146,18 +152,31 @@ class Turtle(Sprite):
             self.state = 'half_up'
             self.start_time = time.time()
 
+class Home(Sprite):
+    def __init__(self, x, y, width, height, image):
+        Sprite.__init__(self, x, y, width, height, image)
+
 # Create objects
 player = Player(0, -300, 40, 40, 'media/frog.gif')
-car_left = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
-car_right = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
-log_left = Log(0, -100, 121, 40, 'media/log_full.gif', -0.08)
-log_right = Log(0, -150, 121, 40, 'media/log_full.gif', 0.08)
-turtle_left = Turtle(0, -50, 155, 40, 'media/turtle_left.gif', -0.09)
-turtle_right = Turtle(0, 0, 155, 40, 'media/turtle_right.gif', 0.09)
-
+car_left_1 = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
+car_right_1 = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
+car_left_2 = Car(0, -150, 121, 40, 'media/car_left.gif', -0.06)
+car_right_2 = Car(0, -100, 121, 40, 'media/car_right.gif', 0.06)
+car_left_3 = Car(0, -50, 121, 40, 'media/car_left.gif', -0.06)
+log_left_1 = Log(0, 50, 121, 40, 'media/log_full.gif', -0.08)
+log_right_1 = Log(0, 100, 121, 40, 'media/log_full.gif', 0.08)
+turtle_left_1 = Turtle(0, 150, 155, 40, 'media/turtle_left.gif', -0.09)
+turtle_right_1 = Turtle(0, 200, 155, 40, 'media/turtle_right.gif', 0.09)
+log_left_2 = Log(0, 250, 121, 40, 'media/log_full.gif', 0.08)
+home_1 = Home(0, 300, 50, 50, 'media/home.gif')
+home_2 = Home(-100, 300, 50, 50, 'media/home.gif')
+home_3 = Home(-200, 300, 50, 50, 'media/home.gif')
+home_4 = Home(100, 300, 50, 50, 'media/home.gif')
+home_5 = Home(200, 300, 50, 50, 'media/home.gif')
 # Create list of sprites
-sprites = [car_left, car_right, log_left, log_right, turtle_left, turtle_right]
-sprites.append(player)
+sprites = [car_left_1, car_right_1, car_left_2, car_right_2, car_left_3,
+           log_left_1, log_right_1, turtle_left_1, turtle_right_1, log_left_2,
+           player, home_1, home_2, home_3, home_4, home_5]
 
 # Keyboard binding
 wn.listen()
@@ -187,6 +206,10 @@ while True:
             elif isinstance(sprite, Turtle) and sprite.state != 'submerged':
                 player.dx = sprite.dx
                 break
+            elif isinstance(sprite, Home):
+                player.x = 0
+                player.y = -300
+                sprite.image = 'media/frog_home.gif'
 
 
     #if player.is_collision(car_left) or player.is_collision(car_right):
