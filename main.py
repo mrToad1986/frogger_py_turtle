@@ -63,6 +63,7 @@ class Player(Sprite):
     def __init__(self, x, y, width, height, image):
         Sprite.__init__(self, x, y, width, height, image)
         self.dx = 0
+        self.collision = False
 
     def up(self):
         self.y += 50
@@ -193,6 +194,7 @@ while True:
 
     # check for collisions
     player.dx = 0
+    player.collision = False
     for sprite in sprites:
         if player.is_collision(sprite):
             if isinstance(sprite, Car):
@@ -201,15 +203,23 @@ while True:
                 break
             elif isinstance(sprite, Log):
                 player.dx = sprite.dx
+                player.collision = True
                 break
             # no collision for submerged turtle
             elif isinstance(sprite, Turtle) and sprite.state != 'submerged':
                 player.dx = sprite.dx
+                player.collision = True
                 break
             elif isinstance(sprite, Home):
                 player.x = 0
                 player.y = -300
                 sprite.image = 'media/frog_home.gif'
+                break
+    # check for water border crossing
+    if player.y > 0 and player.collision != True:
+        player.x = 0
+        player.y = -300
+
 
 
     #if player.is_collision(car_left) or player.is_collision(car_right):
