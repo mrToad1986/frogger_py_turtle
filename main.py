@@ -9,7 +9,7 @@ wn.cv._rootwindow.resizable(False, False)
 wn.title('Frogger game')
 wn.setup(600, 800)
 wn.bgcolor('green')
-
+wn.bgpic('media/background.gif')
 # Tracer turn off screen update
 wn.tracer(0)
 
