@@ -158,22 +158,22 @@ class Home(Sprite):
         Sprite.__init__(self, x, y, width, height, image)
 
 # Create objects
-player = Player(0, -300, 40, 40, 'media/frog.gif')
-car_left_1 = Car(0, -250, 121, 40, 'media/car_left.gif', -0.06)
-car_right_1 = Car(0, -200, 121, 40, 'media/car_right.gif', 0.06)
-car_left_2 = Car(0, -150, 121, 40, 'media/car_left.gif', -0.06)
-car_right_2 = Car(0, -100, 121, 40, 'media/car_right.gif', 0.06)
-car_left_3 = Car(0, -50, 121, 40, 'media/car_left.gif', -0.06)
-log_left_1 = Log(0, 50, 121, 40, 'media/log_full.gif', -0.08)
-log_right_1 = Log(0, 100, 121, 40, 'media/log_full.gif', 0.08)
-turtle_left_1 = Turtle(0, 150, 155, 40, 'media/turtle_left.gif', -0.09)
-turtle_right_1 = Turtle(0, 200, 155, 40, 'media/turtle_right.gif', 0.09)
-log_left_2 = Log(0, 250, 121, 40, 'media/log_full.gif', 0.08)
-home_1 = Home(0, 300, 50, 50, 'media/home.gif')
-home_2 = Home(-100, 300, 50, 50, 'media/home.gif')
-home_3 = Home(-200, 300, 50, 50, 'media/home.gif')
-home_4 = Home(100, 300, 50, 50, 'media/home.gif')
-home_5 = Home(200, 300, 50, 50, 'media/home.gif')
+player = Player(0, -325, 40, 40, 'media/frog.gif')
+car_left_1 = Car(0, -275, 121, 40, 'media/car_left.gif', -0.06)
+car_right_1 = Car(0, -225, 121, 40, 'media/car_right.gif', 0.06)
+car_left_2 = Car(0, -175, 121, 40, 'media/car_left.gif', -0.06)
+car_right_2 = Car(0, -125, 121, 40, 'media/car_right.gif', 0.06)
+car_left_3 = Car(0, -75, 121, 40, 'media/car_left.gif', -0.06)
+log_left_1 = Log(0, 25, 121, 40, 'media/log_full.gif', -0.08)
+log_right_1 = Log(0, 75, 121, 40, 'media/log_full.gif', 0.08)
+turtle_left_1 = Turtle(0, 125, 155, 40, 'media/turtle_left.gif', -0.09)
+turtle_right_1 = Turtle(0, 175, 155, 40, 'media/turtle_right.gif', 0.09)
+log_left_2 = Log(0, 225, 121, 40, 'media/log_full.gif', 0.08)
+home_1 = Home(0, 275, 50, 50, 'media/home.gif')
+home_2 = Home(-100, 275, 50, 50, 'media/home.gif')
+home_3 = Home(-200, 275, 50, 50, 'media/home.gif')
+home_4 = Home(100, 275, 50, 50, 'media/home.gif')
+home_5 = Home(200, 275, 50, 50, 'media/home.gif')
 # Create list of sprites
 sprites = [car_left_1, car_right_1, car_left_2, car_right_2, car_left_3,
            log_left_1, log_right_1, turtle_left_1, turtle_right_1, log_left_2,
@@ -218,7 +218,7 @@ while True:
     # check for water border crossing
     if player.y > 0 and player.collision != True:
         player.x = 0
-        player.y = -300
+        player.y = -325
 
 
 
