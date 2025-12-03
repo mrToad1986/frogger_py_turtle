@@ -159,25 +159,31 @@ class Home(Sprite):
 
 # Create objects
 player = Player(0, -325, 40, 40, 'media/frog.gif')
-car_left_1 = Car(0, -275, 121, 40, 'media/car_left.gif', -0.06)
-car_right_1 = Car(0, -225, 121, 40, 'media/car_right.gif', 0.06)
-car_left_2 = Car(0, -175, 121, 40, 'media/car_left.gif', -0.06)
-car_right_2 = Car(0, -125, 121, 40, 'media/car_right.gif', 0.06)
-car_left_3 = Car(0, -75, 121, 40, 'media/car_left.gif', -0.06)
-log_left_1 = Log(0, 25, 121, 40, 'media/log_full.gif', -0.08)
-log_right_1 = Log(0, 75, 121, 40, 'media/log_full.gif', 0.08)
-turtle_left_1 = Turtle(0, 125, 155, 40, 'media/turtle_left.gif', -0.09)
-turtle_right_1 = Turtle(0, 175, 155, 40, 'media/turtle_right.gif', 0.09)
-log_left_2 = Log(0, 225, 121, 40, 'media/log_full.gif', 0.08)
-home_1 = Home(0, 275, 50, 50, 'media/home.gif')
-home_2 = Home(-100, 275, 50, 50, 'media/home.gif')
-home_3 = Home(-200, 275, 50, 50, 'media/home.gif')
-home_4 = Home(100, 275, 50, 50, 'media/home.gif')
-home_5 = Home(200, 275, 50, 50, 'media/home.gif')
+
+level_1 = [
+    Car(0, -275, 121, 40, 'media/car_left.gif', -0.06),
+    Car(0, -225, 121, 40, 'media/car_right.gif', 0.06),
+    Car(0, -175, 121, 40, 'media/car_left.gif', -0.06),
+    Car(0, -125, 121, 40, 'media/car_right.gif', 0.06),
+    Car(0, -75, 121, 40, 'media/car_left.gif', -0.06),
+    Log(0, -25, 121, 40, 'media/log_full.gif', 0.08),
+    Log(0, 75, 121, 40, 'media/log_full.gif', -0.08),
+    Turtle(0, 125, 155, 40, 'media/turtle_left.gif', 0.09),
+    Turtle(0, 175, 155, 40, 'media/turtle_right.gif', -0.09),
+    Log(0, 225, 121, 40, 'media/log_full.gif', -0.08),
+]
+
+homes = [
+    Home(0, 275, 50, 50, 'media/home.gif'),
+    Home(-100, 275, 50, 50, 'media/home.gif'),
+    Home(-200, 275, 50, 50, 'media/home.gif'),
+    Home(100, 275, 50, 50, 'media/home.gif'),
+    Home(200, 275, 50, 50, 'media/home.gif'),
+]
+
 # Create list of sprites
-sprites = [car_left_1, car_right_1, car_left_2, car_right_2, car_left_3,
-           log_left_1, log_right_1, turtle_left_1, turtle_right_1, log_left_2,
-           player, home_1, home_2, home_3, home_4, home_5]
+sprites = level_1 + homes
+sprites.append(player)
 
 # Keyboard binding
 wn.listen()
