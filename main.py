@@ -205,7 +205,7 @@ while True:
         if player.is_collision(sprite):
             if isinstance(sprite, Car):
                 player.x = 0
-                player.y = -300
+                player.y = -325
                 break
             elif isinstance(sprite, Log):
                 player.dx = sprite.dx
@@ -218,7 +218,7 @@ while True:
                 break
             elif isinstance(sprite, Home):
                 player.x = 0
-                player.y = -300
+                player.y = -325
                 sprite.image = 'media/frog_home.gif'
                 break
     # check for water border crossing
