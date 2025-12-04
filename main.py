@@ -64,6 +64,7 @@ class Player(Sprite):
         Sprite.__init__(self, x, y, width, height, image)
         self.dx = 0
         self.collision = False
+        self.frogs_home = 0
 
     def up(self):
         self.y += 50
@@ -82,6 +83,11 @@ class Player(Sprite):
         if self.x < -300 or self.x > 300:
             self.x = 0
             self.y = -300
+
+    def go_home(self):
+        self.dx = 0
+        self.x = 0
+        self.y = -325
 
 class Car(Sprite):
     def __init__(self, x, y, width, height, image, dx):
@@ -223,8 +229,7 @@ while True:
     for sprite in sprites:
         if player.is_collision(sprite):
             if isinstance(sprite, Car):
-                player.x = 0
-                player.y = -325
+                player.go_home()
                 break
             elif isinstance(sprite, Log):
                 player.dx = sprite.dx
@@ -236,30 +241,22 @@ while True:
                 player.collision = True
                 break
             elif isinstance(sprite, Home):
-                player.x = 0
-                player.y = -325
+                player.go_home()
                 sprite.image = 'media/frog_home.gif'
+                player.frogs_home += 1
                 break
     # check for water border crossing
     if player.y > 0 and player.collision != True:
-        player.x = 0
-        player.y = -325
+        player.go_home()
 
-
-
-    #if player.is_collision(car_left) or player.is_collision(car_right):
-    #    player.x = 0
-    #    player.y = -300
-
-    #if player.is_collision(log_left):
-    #    player.dx = log_left.dx
-    #else:
-    #    player.dx = 0
-
-    #if player.is_collision(log_right):
-    #    player.dx = log_right.dx
-    #else:
-    #    player.dx = 0
+    # check for win
+    if player.frogs_home == 5:
+        player.go_home()
+        player.frogs_home = 0
+        for home in homes:
+            home.image = 'media/home.gif'
+        print('You Win!')
+        break
 
     # update screen
     wn.update()
@@ -267,4 +264,4 @@ while True:
     # clear the pen
     pen.clear()
 
-wn.mainloop()
+    #wn.mainloop()
