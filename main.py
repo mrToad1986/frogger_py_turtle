@@ -166,7 +166,7 @@ level_1 = [
     Car(0, -175, 121, 40, 'media/car_left.gif', -0.06),
     Car(0, -125, 121, 40, 'media/car_right.gif', 0.06),
     Car(0, -75, 121, 40, 'media/car_left.gif', -0.06),
-    Log(0, -25, 121, 40, 'media/log_full.gif', 0.08),
+    Log(0, 25, 121, 40, 'media/log_full.gif', 0.08),
     Log(0, 75, 121, 40, 'media/log_full.gif', -0.08),
     Turtle(0, 125, 155, 40, 'media/turtle_left.gif', 0.09),
     Turtle(0, 175, 155, 40, 'media/turtle_right.gif', -0.09),
