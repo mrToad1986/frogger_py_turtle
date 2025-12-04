@@ -162,15 +162,34 @@ player = Player(0, -325, 40, 40, 'media/frog.gif')
 
 level_1 = [
     Car(0, -275, 121, 40, 'media/car_left.gif', -0.06),
+    Car(221, -275, 121, 40, 'media/car_left.gif', -0.06),
+
     Car(0, -225, 121, 40, 'media/car_right.gif', 0.06),
+    Car(221, -225, 121, 40, 'media/car_right.gif', 0.06),
+
     Car(0, -175, 121, 40, 'media/car_left.gif', -0.06),
+    Car(221, -175, 121, 40, 'media/car_left.gif', -0.06),
+
     Car(0, -125, 121, 40, 'media/car_right.gif', 0.06),
+    Car(221, -125, 121, 40, 'media/car_right.gif', 0.06),
+
     Car(0, -75, 121, 40, 'media/car_left.gif', -0.06),
-    Log(0, 25, 121, 40, 'media/log_full.gif', 0.08),
-    Log(0, 75, 121, 40, 'media/log_full.gif', -0.08),
+    Car(221, -75, 121, 40, 'media/car_left.gif', -0.06),
+
+    Log(0, 25, 161, 40, 'media/log_full.gif', 0.08),
+    Log(261, 25, 161, 40, 'media/log_full.gif', 0.08),
+
+    Log(0, 75, 161, 40, 'media/log_full.gif', -0.08),
+    Log(261, 75, 161, 40, 'media/log_full.gif', -0.08),
+
     Turtle(0, 125, 155, 40, 'media/turtle_left.gif', 0.09),
+    Turtle(255, 125, 155, 40, 'media/turtle_left.gif', 0.09),
+
     Turtle(0, 175, 155, 40, 'media/turtle_right.gif', -0.09),
-    Log(0, 225, 121, 40, 'media/log_full.gif', -0.08),
+    Turtle(255, 175, 155, 40, 'media/turtle_right.gif', -0.09),
+
+    Log(0, 225, 161, 40, 'media/log_full.gif', -0.08),
+    Log(261, 225, 161, 40, 'media/log_full.gif', -0.08),
 ]
 
 homes = [
